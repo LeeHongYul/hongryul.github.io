@@ -7,11 +7,12 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Noto Sans KR', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
-      font-size: 2.8em;
+      font-size: 3.5em; /* 크게 */
       text-align: center;
       overflow: hidden;
+      background: black; /* 대비를 위해 배경 검정 추천 */
     }
 
     #background-video {
@@ -46,7 +47,7 @@
       transform: translate(-50%, -50%);
       font-weight: bold;
       white-space: nowrap;
-      line-height: 1.4;
+      line-height: 1.6; /* 줄 간격 확대 */
       padding: 1em 2em;
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
@@ -55,11 +56,11 @@
     }
 
     .highlight {
-      font-size: 1.5em;
+      font-size: 2.25em; /* 50% 크게 */
     }
 
     .small {
-      font-size: 0.6em;
+      font-size: 0.85em; /* 조금 더 크게 */
       margin-top: 0.5em;
       display: block;
     }
@@ -73,10 +74,9 @@
 
   <div class="message">
     홈초이스 방문을 환영합니다.<br />
-    <span class="highlight">2025 이사간담회</span><br />
+    <span class="highlight">2025 - 4차 이사회</span><br />
     <span class="small">
-      2025.07.04(Fri) 15:00 -<br />
-      15F, YTN Newsquare, 홈초이스 대회의실
+      2025.07.04(Fri) 15:00 -
     </span>
   </div>
 
@@ -88,12 +88,10 @@
       const isPortrait = window.innerHeight > window.innerWidth;
 
       if (isPortrait) {
-        // 세로모드
         source.setAttribute('src', 'vertical_video.mp4');
         message.style.display = 'none';
         document.body.classList.remove('landscape');
       } else {
-        // 가로모드
         source.setAttribute('src', 'welcome_video.mp4');
         message.style.display = 'block';
         document.body.classList.add('landscape');
