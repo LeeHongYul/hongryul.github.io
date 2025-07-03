@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>환영합니다</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
@@ -14,20 +15,20 @@
     }
 
     #background-video {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  height: auto;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  object-position: 50% 50%;
-  z-index: -100;
-  background-size: cover;
-  filter: brightness(1);
-}
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      object-position: 50% 50%;
+      z-index: -100;
+      background-size: cover;
+      filter: brightness(1);
+    }
 
     .message {
       position: absolute;
@@ -57,7 +58,7 @@
 </head>
 <body>
   <video autoplay muted loop id="background-video">
-    <source src="welcome_video.mp4" type="video/mp4" />
+    <source id="video-source" src="welcome_video.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
@@ -69,5 +70,29 @@
       15F, YTN Newsquare, 홈초이스 대회의실
     </span>
   </div>
+
+  <script>
+    function updateVideoForOrientation() {
+      const video = document.getElementById('background-video');
+      const source = document.getElementById('video-source');
+      const message = document.querySelector('.message');
+      const isPortrait = window.innerHeight > window.innerWidth;
+
+      if (isPortrait) {
+        source.setAttribute('src', 'vertical_video.mp4');
+        message.style.display = 'none';
+      } else {
+        source.setAttribute('src', 'welcome_video.mp4');
+        message.style.display = 'block';
+      }
+
+      video.load();
+      video.play();
+    }
+
+    // 실행
+    window.addEventListener('load', updateVideoForOrientation);
+    window.addEventListener('resize', updateVideoForOrientation);
+  </script>
 </body>
 </html>
