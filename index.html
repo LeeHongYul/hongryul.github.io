@@ -16,6 +16,18 @@
 
     #background-video {
       position: fixed;
+      z-index: -100;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-size: cover;
+      filter: brightness(1);
+    }
+
+    /* 가로모드일 때 가운데 정렬 */
+    .landscape #background-video {
       top: 50%;
       left: 50%;
       width: auto;
@@ -25,9 +37,6 @@
       transform: translate(-50%, -50%);
       object-fit: cover;
       object-position: 50% 50%;
-      z-index: -100;
-      background-size: cover;
-      filter: brightness(1);
     }
 
     .message {
@@ -58,41 +67,4 @@
 </head>
 <body>
   <video autoplay muted loop id="background-video">
-    <source id="video-source" src="welcome_video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-
-  <div class="message">
-    홈초이스 방문을 환영합니다.<br />
-    <span class="highlight">2025 이사간담회</span><br />
-    <span class="small">
-      2025.07.04(Fri) 15:00 -<br />
-      15F, YTN Newsquare, 홈초이스 대회의실
-    </span>
-  </div>
-
-  <script>
-    function updateVideoForOrientation() {
-      const video = document.getElementById('background-video');
-      const source = document.getElementById('video-source');
-      const message = document.querySelector('.message');
-      const isPortrait = window.innerHeight > window.innerWidth;
-
-      if (isPortrait) {
-        source.setAttribute('src', 'vertical_video.mp4');
-        message.style.display = 'none';
-      } else {
-        source.setAttribute('src', 'welcome_video.mp4');
-        message.style.display = 'block';
-      }
-
-      video.load();
-      video.play();
-    }
-
-    // 실행
-    window.addEventListener('load', updateVideoForOrientation);
-    window.addEventListener('resize', updateVideoForOrientation);
-  </script>
-</body>
-</html>
+    <source id="video-source" src="welcome_video.mp4" type="video/m_
