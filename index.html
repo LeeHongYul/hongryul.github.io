@@ -8,9 +8,9 @@
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
-      font-size: 3em;
+      font-size: 2.5em;
       text-align: center;
-      overflow: hidden; /* Hide scrollbars */
+      overflow: hidden;
     }
     #background-video {
       position: fixed;
@@ -30,7 +30,16 @@
       transform: translate(-50%, -50%);
       font-weight: bold;
       text-shadow: 0px 0px 15px rgba(0,0,0,0.8);
-      white-space: nowrap; /* Prevent text wrapping */
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+    .highlight {
+      font-size: 1.4em;
+    }
+    .small {
+      font-size: 0.6em;
+      margin-top: 0.5em;
+      display: block;
     }
   </style>
 </head>
@@ -40,21 +49,10 @@
     Your browser does not support the video tag.
   </video>
 
-  <div class="message"></div>
-
-  <script>
-    // Function to get URL parameters
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-
-    // Get the name from the URL, or use a default name
-    const name = getQueryParam('name') || '손님';
-
-    // Set the welcome message
-    const messageDiv = document.querySelector('.message');
-    messageDiv.textContent = `${name} 환영합니다!`;
-  </script>
+  <div class="message">
+    홈초이스 방문을 환영합니다.<br>
+    <span class="highlight">2025 이사간담회</span><br>
+    <span class="small">2025.07.04(Fri) 15:00 -<br>15F, YTN Newsquare, 홈초이스 대회의실</span>
+  </div>
 </body>
 </html>
