@@ -14,19 +14,20 @@
     }
 
     #background-video {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      z-index: -100;
-      background-size: cover;
-      filter: brightness(1); /* 밝기 유지 */
-      object-fit: cover;
-      object-position: center;
-    }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  object-position: 50% 50%;
+  z-index: -100;
+  background-size: cover;
+  filter: brightness(1);
+}
 
     .message {
       position: absolute;
