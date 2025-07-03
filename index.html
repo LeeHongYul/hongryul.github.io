@@ -1,108 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>환영합니다</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>환영합니다</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      font-family: 'Noto Sans KR', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      font-size: 3.5em; /* 크게 */
-      text-align: center;
-      overflow: hidden;
-      background: black; /* 대비를 위해 배경 검정 추천 */
-    }
-
-    #background-video {
-      position: fixed;
-      z-index: -100;
-      top: 0;
-      left: 0;
-      width: 100%;
+      padding: 0;
       height: 100%;
-      object-fit: cover;
-      background-size: cover;
-      filter: brightness(1);
+      width: 100%;
     }
 
-    /* 가로모드일 때 가운데 정렬 */
-    .landscape #background-video {
-      top: 50%;
-      left: 50%;
-      width: auto;
-      height: auto;
-      min-width: 100%;
-      min-height: 100%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      object-position: 50% 50%;
-    }
-
-    .message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-weight: bold;
-      white-space: nowrap;
-      line-height: 1.6; /* 줄 간격 확대 */
-      padding: 1em 2em;
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-      text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    }
-
-    .highlight {
-      font-size: 2.25em; /* 50% 크게 */
-    }
-
-    .small {
-      font-size: 0.85em; /* 조금 더 크게 */
-      margin-top: 0.5em;
+    #background-image {
       display: block;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center center;
     }
   </style>
 </head>
 <body>
-  <video autoplay muted loop id="background-video">
-    <source id="video-source" src="welcome_video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-
-  <div class="message">
-    홈초이스 방문을 환영합니다.<br />
-    <span class="highlight">2025 - 4차 이사회</span><br />
-    <span class="small">
-      2025.07.04(Fri) 15:00 -
-    </span>
-  </div>
+  <img id="background-image" src="landscape.png" alt="전체 배경 이미지" />
 
   <script>
-    function updateLayoutForOrientation() {
-      const video = document.getElementById('background-video');
-      const source = document.getElementById('video-source');
-      const message = document.querySelector('.message');
+    function updateBackgroundImage() {
+      const img = document.getElementById('background-image');
       const isPortrait = window.innerHeight > window.innerWidth;
 
-      if (isPortrait) {
-        source.setAttribute('src', 'vertical_video.mp4');
-        message.style.display = 'none';
-        document.body.classList.remove('landscape');
-      } else {
-        source.setAttribute('src', 'welcome_video.mp4');
-        message.style.display = 'block';
-        document.body.classList.add('landscape');
-      }
-
-      video.load();
-      video.play();
+      img.src = isPortrait ? 'portrait.png' : 'landscape.png';
+      img.style.objectPosition = isPortrait ? 'center top' : 'center center';
     }
 
-    window.addEventListener('load', updateLayoutForOrientation);
-    window.addEventListener('resize', updateLayoutForOrientation);
+    window.addEventListener('load', updateBackgroundImage);
+    window.addEventListener('resize', updateBackgroundImage);
   </script>
 </body>
 </html>
