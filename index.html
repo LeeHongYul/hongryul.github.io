@@ -14,21 +14,20 @@
       overflow: hidden;
     }
 
-    video {
+    #background-video {
       position: fixed;
+      z-index: -100;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       background-size: cover;
-      z-index: -100;
       filter: brightness(1);
-      display: none; /* 처음에는 모두 숨김 */
     }
 
-    .landscape #video-landscape {
-      display: block;
+    /* 가로모드일 때 가운데 정렬 */
+    .landscape #background-video {
       top: 50%;
       left: 50%;
       width: auto;
@@ -36,11 +35,8 @@
       min-width: 100%;
       min-height: 100%;
       transform: translate(-50%, -50%);
+      object-fit: cover;
       object-position: 50% 50%;
-    }
-
-    .portrait #video-portrait {
-      display: block;
     }
 
     .message {
@@ -67,21 +63,12 @@
       margin-top: 0.5em;
       display: block;
     }
-
-    .portrait .message {
-      display: none;
-    }
   </style>
 </head>
 <body>
-  <!-- Landscape video -->
-  <video autoplay muted loop id="video-landscape">
-    <source src="welcome_video.mp4" type="video/mp4" />
-  </video>
-
-  <!-- Portrait video -->
-  <video autoplay muted loop id="video-portrait">
-    <source src="vertical_video.mp4" type="video/mp4" />
+  <video autoplay muted loop id="background-video">
+    <source id="video-source" src="welcome_video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
   </video>
 
   <div class="message">
@@ -95,14 +82,25 @@
 
   <script>
     function updateLayoutForOrientation() {
+      const video = document.getElementById('background-video');
+      const source = document.getElementById('video-source');
+      const message = document.querySelector('.message');
       const isPortrait = window.innerHeight > window.innerWidth;
+
       if (isPortrait) {
+        // 세로모드
+        source.setAttribute('src', 'vertical_video.mp4');
+        message.style.display = 'none';
         document.body.classList.remove('landscape');
-        document.body.classList.add('portrait');
       } else {
-        document.body.classList.remove('portrait');
+        // 가로모드
+        source.setAttribute('src', 'welcome_video.mp4');
+        message.style.display = 'block';
         document.body.classList.add('landscape');
       }
+
+      video.load();
+      video.play();
     }
 
     window.addEventListener('load', updateLayoutForOrientation);
